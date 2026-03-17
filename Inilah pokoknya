@@ -1,0 +1,39 @@
+try{
+
+this.stmt = this.conn.createStatement();
+
+String query = "insert into parkir values("+id_parkir+ ","+no_plat+","+lama+","+harga+")";
+
+int hasil = this.stmt.executeUpdate(query);
+
+if(hasil==1) System.out.println("OK"); else System.out.printl
+
+catch (Exception e){
+
+System.out.println(e.getMessage());
+
+}
+public void totalPemasukan(){
+
+try{
+
+this.stmt = this.conn.createStatement();
+
+String query = "select sum(harga) as total from parkir";
+
+ResultSet hasil this.stmt.executeQuery(query);
+
+hasil.next();
+
+System.out.println(hasil.getString(columnLabel "total"));
+
+}catch (Exception e){
+
+System.out.println(e.getMessage());
+
+}
+
+
+}
+
+
