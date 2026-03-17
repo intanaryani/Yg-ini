@@ -1,0 +1,21 @@
+public void tampilData()
+
+try{
+
+this.stat this.conn.createStatement();
+
+String query = "select from parkir";
+
+ResultSet rs = this.stmt.executeQuery(query);
+
+while(rs.next()){
+
+}
+
+1
+
+System.out.println(rs.getString(columnLabel: "no_plat"));
+
+System.out.println(rs.getString(columnLabel: "harga"));
+
+System.out.println("===============");
