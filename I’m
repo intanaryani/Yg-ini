@@ -1,0 +1,56 @@
+package com.rplbo.jdbc.parkirjdbc;
+
+import java.sql.*;
+
+public class ParkirApp {
+    private String strcon;
+    private Connection conn;
+    private Statement stmt;
+    
+    public void koneksi(){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            this.conn = DriverManager.getConnection("jdbc:sqlite:parkir.sqlitedb");
+        } catch (Exception se){
+            System.out.println(se.getMessage());
+        }
+    }
+
+    public void tambahData(int id_parkir,String no_plat, int lama,int harga){
+        try{
+            this.stmt = this.conn.createStatement();
+            String query = "insert into parkir values("+id_parkir+",'"+no_plat+"',"+lama+","+harga+")";
+            int hasil = this.stmt.executeUpdate(query);
+            if (hasil==1) System.out.println("OK");else System.out.println("NO");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void tampilData(){
+        try {
+            this.stmt = this.conn.createStatement();
+            String query = "select * from parkir";
+            ResultSet rs = this.stmt.executeQuery(query);
+            while(rs.next()){
+                System.out.println(rs.getString("no_plat"));
+                System.out.println(rs.getString("harga"));
+                System.out.println("======================");
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void totalPemasukan(){
+        try{
+            this.stmt = this.conn.createStatement();
+            String query = "select sum(harga) as total from parkir";
+            ResultSet hasil = this.stmt.executeQuery(query);
+            hasil.next();
+            System.out.println(hasil.getString("total"));
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+}
